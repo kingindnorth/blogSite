@@ -4,7 +4,7 @@ const ejs = require("ejs")
 const connect = require("./utils/db")
 const authRoute = require("./routes/auth")
 const userRoute = require("./routes/users")
-// const blogRoute = require("./routes/blogs")
+const blogRoute = require("./routes/blogs")
 
 require("dotenv").config()
 
@@ -21,7 +21,7 @@ app.set("view engine","ejs")
 //routes
 app.use("/auth",authRoute)
 app.use("/users",userRoute)
-// app.use("/blogs",blogRoute)
+app.use("/blogs",blogRoute)
 
 app.listen(PORT,()=>{
     connect()
