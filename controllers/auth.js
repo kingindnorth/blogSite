@@ -29,7 +29,7 @@ const register = async(req,res) => {
 
 const login = async(req,res) => {
     try{
-        const user = await User.find({username:req.body.username})
+        const user = await User.findOne({username:req.body.username})
         if(!user) return res.status(400).json({
             success:false,
             msg:"Enter a valid username"
