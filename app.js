@@ -11,6 +11,9 @@ require("dotenv").config()
 const app = express()
 const PORT = process.env.PORT || 3210
 
+//serve static folder
+app.use(express.static("public"))
+
 //set view engine
 app.set("view engine", "ejs")
 
