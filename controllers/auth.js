@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs")
+const jwt = require("jsonwebtoken")
 const User = require("../models/User")
 
 const register = async(req,res) => {
@@ -41,8 +42,10 @@ const login = async(req,res) => {
             msg:"Incorrect password"
         })
 
+        const token = jwt.sign({id:user._id},process.env.JWT_SECRET)
         const {password, ...others} = user._doc
-        res.status(200).json({
+        
+        res.cookie("access_token",token).status(200).json({
             success:true,
             msg:"You are now loged in!",
             payload:others
