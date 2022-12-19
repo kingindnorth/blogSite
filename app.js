@@ -5,6 +5,7 @@ const connect = require("./utils/db")
 const authRoute = require("./routes/auth")
 const userRoute = require("./routes/users")
 const blogRoute = require("./routes/blogs")
+const viewRoute = require("./routes/render")
 
 require("dotenv").config()
 
@@ -17,14 +18,19 @@ app.use(express.static("public"))
 //set view engine
 app.set("view engine", "ejs")
 
-//body-parser
+//body-parser-json
 app.use(express.json())
+//body-parser-form
+app.use(express.urlencoded({extended:true}))
+
 //static file serving
 app.use(express.static("public"))
+
 //view engine
 app.set("view engine","ejs")
 
 //routes
+app.use("/views",viewRoute)
 app.use("/auth",authRoute)
 app.use("/users",userRoute)
 app.use("/blogs",blogRoute)
