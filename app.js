@@ -1,5 +1,6 @@
 const express = require("express")
 const ejs = require("ejs")
+const cookieParser = require("cookie-parser")
 
 const connect = require("./utils/db")
 const authRoute = require("./routes/auth")
@@ -17,6 +18,9 @@ app.use(express.static("public"))
 
 //set view engine
 app.set("view engine", "ejs")
+
+//cookie parser
+app.use(cookieParser())
 
 //body-parser-json
 app.use(express.json())
