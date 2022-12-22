@@ -11,9 +11,9 @@ const {
     deleteUserById
 } = require("../controllers/users")
 
-router.get("/",verifyToken,getAllUser)
+router.get("/",getAllUser)
 router.get("/:id",getUserById)
-router.put("/:id",updateUserById)
-router.delete("/:id",deleteUserById)
+router.put("/:id",verifyToken,updateUserById)
+router.delete("/:id",verifyToken,deleteUserById)
 
 module.exports = router

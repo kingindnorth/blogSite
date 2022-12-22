@@ -54,12 +54,17 @@ const getUserById = async(req,res) => {
 //update user
 const updateUserById = async(req,res) => {
     try{
+        const param = req.params.id
+        if(req.user.id !== param) return res.status(400).json({
+            success:false,
+            msg:"not authorized"
+        })
+
         if(req.body.password){
             const salt = await bcrypt.genSalt(10);
             req.body.password = await bcrypt.hash(req.body.password, salt);
         }
 
-        const param = req.params.id
         const user = await User.findByIdAndUpdate(param,{$set:req.body},{new:true})
         if(!user) return res.status(400).json({
             success:false,
@@ -85,6 +90,10 @@ const updateUserById = async(req,res) => {
 const deleteUserById = async(req,res) => {
     try{
         const param = req.params.id
+        if(req.user.id !== param) return res.status(400).json({
+            success:false,
+            msg:"not authorized"
+        })
         const user = await User.findByIdAndDelete(param)
         if(!user) return res.status(400).json({
             success:false,
