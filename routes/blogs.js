@@ -1,5 +1,7 @@
 const router = require("express").Router()
 
+const verifyToken = require("../utils/jwt")
+
 const {
     createBlog,
     getAllBlogs,
@@ -8,10 +10,10 @@ const {
     deleteBlogById
 } = require("../controllers/blogs")
 
-router.post("/",createBlog)
+router.post("/",verifyToken,createBlog)
 router.get("/",getAllBlogs)
 router.get("/:id",getBlogById)
-router.put("/:id",updateBlogById)
-router.delete("/:id",deleteBlogById)
+router.put("/:id",verifyToken,updateBlogById)
+router.delete("/:id",verifyToken,deleteBlogById)
 
 module.exports = router

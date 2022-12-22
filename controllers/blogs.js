@@ -76,6 +76,10 @@ const getBlogById = async(req,res) => {
 const updateBlogById = async(req,res) => {
     try{
         const param = req.params.id
+        if(req.user.id !== param) return res.status(400).json({
+            success:false,
+            msg:"not authorized"
+        })
         const blog = await Blog.findByIdAndUpdate(param,{$set:req.body},{new:true})
         if(!blog) return res.status(400).json({
             success:false,
@@ -100,6 +104,10 @@ const updateBlogById = async(req,res) => {
 const deleteBlogById = async(req,res) => {
     try{
         const param = req.params.id
+        if(req.user.id !== param) return res.status(400).json({
+            success:false,
+            msg:"not authorized"
+        })
         const blog = await Blog.findByIdAndDelete(param)
         if(!blog) return res.status(400).json({
             success:false,
