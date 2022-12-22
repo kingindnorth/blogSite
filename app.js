@@ -34,7 +34,7 @@ app.use(express.static("public"))
 app.set("view engine","ejs")
 
 //routes
-app.use("/views",viewRoute)
+app.use("/",viewRoute)
 app.use("/auth",authRoute)
 app.use("/users",userRoute)
 app.use("/blogs",blogRoute)

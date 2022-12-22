@@ -1,5 +1,7 @@
 const router = require("express").Router()
 
+const verifyToken = require("../utils/jwt")
+
 const {
     register,
     login,
@@ -7,9 +9,9 @@ const {
     blogs
 } = require("../controllers/render")
 
-router.get("/register")
-router.get("/login")
-router.get("/createBlog")
-router.get("/blogs")
+router.get("/register",register)
+router.get("/login",login)
+router.get("/createBlog",verifyToken,createBlog)
+router.get("/blogs",blogs)
 
 module.exports = router
